@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>井字棋</title>
+	<style>
+		.content{
+			border:1px solid blue;
+		}
+		table tr td input{
+			width: 50px;
+			height: 50px;
+			background: red;
+			box-shadow: 0 0 2px #eee;
+			-webkit-transition:background 100ms;
+			-moz-transition:background 100ms;
+			-ms-transition:background 100ms;
+			-o-transition:background 100ms;
+			transition:background 100ms;
+			cursor: pointer;
+			color: red;
+		}
+		
+
+		table tr td input:hover{
+			background: #ccc;
+		}
+
+		/*.footer{
+			width: 100px;
+			margin: 0 auto;
+		}
+		.footer input{
+			width: 50px;
+			height: 40px;
+			border-radius: 4px;
+			text-align: center;
+			margin:20px 25px;
+			cursor: pointer;
+
+		}*/
+	</style>
+</head>
+<body>
+	<div class="content">
+		<table border="3" align="center">
+			<tr>
+				<td><input type="button" onclick="changeColor(0)" value=""></td>
+				<td><input type="button" onclick="changeColor(1)" value=""></td>
+				<td><input type="button" onclick="changeColor(2)" value=""></td>
+			</tr>
+			<tr>
+				<td><input type="button" onclick="changeColor(3)" value=""></td>
+				<td><input type="button" onclick="changeColor(4)" value=""></td>
+				<td><input type="button" onclick="changeColor(5)" value=""></td>
+			</tr>
+			<tr>
+				<td><input type="button" onclick="changeColor(6)" value=""></td>
+				<td><input type="button" onclick="changeColor(7)" value=""></td>
+				<td><input type="button" onclick="changeColor(8)" value=""></td>
+			</tr>
+		</table>
+		<!-- <div class="footer">
+			<input type="button" value="start">
+		</div> -->
+	</div>
+
+<script>
+	var i=0;
+	var Inp=document.getElementsByTagName('input');
+
+	function isWin(k){
+		var button=new Array();
+		button[0]=new Array(Inp[0],Inp[1],Inp[2]);
+		button[1]=new Array(Inp[3],Inp[4],Inp[5]);
+		button[2]=new Array(Inp[6],Inp[7],Inp[8]);
+		/*判断横排是否相同*/
+		for(var x=0;x<3;x++){
+			var m=0;
+			for(var y=0;y<3;y++){
+				if(button[x][y].value==k){
+					m++;
+					if(m==3){
+						alert('player'+k+' win!')
+					}
+				}
+			}
+		}
+		/*判断竖排是否相同*/
+		for(var y=0;y<3;y++){
+			var n=0;
+			for(var x=0;x<3;x++){
+				if(button[x][y].value==k){
+					n++;
+					if(n==3){
+						alert('player'+k+' win!');
+					}
+				}
+			}
+		}
+		/*判断对角线相同*/
+		if(button[0][0].value==k && button[1][1].value==k && button[2][2].value==k){
+			alert('player'+k+' win!');
+		}
+
+		if(button[0][2].value==k && button[1][1].value==k && button[2][0].value==k){
+			alert('player'+k+' win!');
+		}
+
+
+	}
+
+	//玩家点击方块改变颜色
+	function changeColor(num){
+		//var button=document.getElementByTagName("input");
+		//玩家1
+		if(i==0){
+			Inp[num].style.background="blue";
+			Inp[num].value=1;
+			isWin(1);
+			i++;
+		}
+		//玩家2
+		else if(i==1){
+			Inp[num].style.background="green";
+			Inp[num].value=2;
+			isWin(2);
+			i=0;
+		} else{
+			alert("game is wrong!!!");
+		}
+	}
+
+	//判断玩家的输赢
+	
+</script>
+</body>
+</html>
